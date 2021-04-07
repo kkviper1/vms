@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,11 +28,14 @@ public class Voter {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int voterID;
 	
+	@NotEmpty(message = "Name cannot be empty")
 	private String voterName;
 	
+	@NotNull(message = "Age cannot be empty")
+	@Min(18)
 	private int voterAge;
 	
-	@Size(min=10, max = 10)
+	@Size(min=10, max = 10, message = "Invalid Phone number")
 	private String voterPhone;
 	
 	private String voterCity;
@@ -38,6 +44,10 @@ public class Voter {
 	
 	@Email
 	private String email;
+	
+	@Size(min=8)
+	@NotEmpty(message = "Invalid password")
+	private String password;
 
 	/**
 	 * @return the voterID
@@ -135,6 +145,17 @@ public class Voter {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
-	}	
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+	
 
 }
